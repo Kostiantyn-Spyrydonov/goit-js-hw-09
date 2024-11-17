@@ -67,21 +67,22 @@ const images = [
   },
 ];
 
-// Создаём разметку
-const galleryContainer = document.querySelector('.gallery');
-const galleryMarkup = images
+const galleryList = document.querySelector('ul.gallery');
+
+const markup = images
   .map(
-    ({ preview, original, description }) => `
-  <li>
-    <a href="${original}">
-      <img src="${preview}" alt="${description}" width="360" height="200" />
-    </a>
-  </li>
-`
+    ({ preview, original, description }) =>
+      `<li class="gallery-item">
+            <a class="gallery-link" href=${original}>
+                <img class="gallery-image"
+                src=${preview}
+                alt='${description}' />
+            </a>
+        </li>  `
   )
   .join('');
 
-galleryContainer.innerHTML = galleryMarkup;
+galleryList.insertAdjacentHTML('beforeend', markup);
 
 new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
